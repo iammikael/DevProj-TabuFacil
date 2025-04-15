@@ -2,10 +2,6 @@
   📚 Tabufácil
 </h1>
 
-<p align="center">
-  <i>Facilitando o aprendizado da tabuada com uma aplicação web interativa</i>
-</p>
-
 ---
 
 ## 🚀 Tecnologias Utilizadas
@@ -14,7 +10,6 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="40" alt="Node.js" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="40" alt="React" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="40" alt="Next.js" />
-  <img src="https://raw.githubusercontent.com/tabler/tabler-icons/master/icons/brand-github.svg" width="40" alt="Lucide-react (ícone genérico)" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="40" alt="MySQL" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="40" alt="Git" />
 </p>
@@ -54,3 +49,29 @@ Antes de começar, você vai precisar ter instalado:
 
 ```bash
 git clone https://github.com/seu-usuario/tabufacil.git
+```
+### 2. Acesse a pasta do projeto
+
+```bash
+cd tabufacil
+```
+### 3. Instale as dependências
+
+```bash
+npm install
+```
+### 4. Configure o arquivo .env
+
+```bash
+DATABASE_URL="mysql://usuario:senha@localhost:3306/seubanco"
+```
+### 5. Crie o banco de dados e execute as migrations
+
+```bash
+npx prisma migrate dev
+```
+### 6. Rode o projeto
+
+```bash
+npm run dev
+```
