@@ -2,9 +2,13 @@
   📚 Tabufácil
 </h1>
 
----
+O presente documento visa delinear a proposta de projeto de trabalho da disciplina Projetos em Sistemas Computacionais, do 6º semestre da graduação em Sistemas de Informação da Universidade Federal da Grande Dourados.
 
-## 🚀 Tecnologias Utilizadas
+O projeto, intitulado **TABUFÁCIL - Facilitando a tabuada**, é uma aplicação educacional na plataforma Web acessível a partir de dispositivos conectados à internet, de treinamento de tabuada para crianças em idade de aprendizado matemático. A aplicação será especificamente desenvolvida para crianças que estão cursando o ensino fundamental e que apresentam dificuldades no conteúdo.
+
+
+
+# 🚀 Tecnologias Utilizadas
 
 <p align="left">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="40" alt="Node.js" />
@@ -13,14 +17,6 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="40" alt="MySQL" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="40" alt="Git" />
 </p>
-
----
-
-## 📖 Descrição do Projeto
-
-O presente documento visa delinear a proposta de projeto de trabalho da disciplina Projetos em Sistemas Computacionais, do 6º semestre da graduação em Sistemas de Informação da Universidade Federal da Grande Dourados.
-
-O projeto, intitulado **TABUFÁCIL - Facilitando a tabuada**, é uma aplicação educacional na plataforma Web acessível a partir de dispositivos conectados à internet, de treinamento de tabuada para crianças em idade de aprendizado matemático. A aplicação será especificamente desenvolvida para crianças que estão cursando o ensino fundamental e que apresentam dificuldades no conteúdo.
 
 ---
 
