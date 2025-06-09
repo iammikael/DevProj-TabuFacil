@@ -1,234 +1,182 @@
-@font-face {
-    font-family: 'Cherry Bomb One';
-    src: url('/fonts/cherry-bomb-one-v9-latin-regular.woff2') format('woff2'),
-         url('/fonts/cherry-bomb-one-v9-latin-regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Estilos principais */
-body {
-    background-image: linear-gradient(to bottom right, #25a4d7, #80b8d8);
+body{
+    background-image: linear-gradient(to bottom right,#25a4d7, #80b8d8); 
     background-attachment: fixed;
-    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
-h1 {
+h1{
     font-family: "Cherry Bomb One", system-ui;
     font-size: 200px;
     color: #f1df26;
     -webkit-text-stroke: 5px #aea11e;
     margin-bottom: 30px;
-}
+   }
 
-.numero {
+.numero{
     font-family: "Cherry Bomb One", system-ui;
     font-size: 200px;
     color: #f1df26;
     -webkit-text-stroke: 10px #aea11e;
-    margin: 0 20px;
+    margin: 0px 20px 0px 20px
 }
 
-/* Centralização do conteúdo */
-#centro,
+#centro{
+    position: absolute;
+    width: 90%;
+    height: 80%;
+    margin:auto;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    /* border: 1px #fff solid; */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #centro_menu {
     position: absolute;
     width: 90%;
     height: 80%;
-    margin: auto;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    margin:auto;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    /* border: 1px #fff solid;*/ 
     text-align: center;
-    display: flex;
-    flex-direction: column; /* Alinha os itens na vertical */
-    align-items: center; /* Centraliza os itens horizontalmente */
-    justify-content: center; /* Centraliza os itens verticalmente */
-}
-.texto-central{
-    font-size: 65px;
-    -webkit-text-stroke: 1px #aea11e;
-    font-family: "Cherry Bomb One", system-ui;
-    color: #f1df26;
-    padding-left: 21%;
+    align-items: center;
+    justify-content: center;
 }
 
-#centro h1,
-#centro_menu h1 {
+#centro_avisos {
+    position: absolute;
+    width: 800px;
+    height: 80%;
+    margin:auto;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    /*border: 1px #fff solid;*/
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+#centro h1{
     font-size: 115px;
     -webkit-text-stroke: 3px #aea11e;
 }
 
-#centro_menu h2 {
+#centro_menu h1{
+    font-size: 115px;
+    -webkit-text-stroke: 3px #aea11e;
+}
+
+h2{
     font-size: 65px;
     -webkit-text-stroke: 1px #aea11e;
     font-family: "Cherry Bomb One", system-ui;
     color: #f1df26;
 }
 
-/* Barra inferior */
-#lower_bar {
+#centro_menu h3{
+    margin-top: -110px;
+    font-size: 70px;
+    font-family: Georgia;
+    font-style: italic;
+    font-weight: lighter;
+    color: #ef985c;
+    -webkit-text-stroke: 2px #af3a27;
+}
+
+#lower_bar{
     height: 55px;
     width: 100%;
     margin: auto auto auto -10px;
     position: fixed;
     background-color: #ef985c;
-    bottom: 0;
+    bottom: 0px;
     text-align: center;
+    /*font-family: Georgia, 'Times New Roman', Times, serif; */
     font-family: "Cherry Bomb One", system-ui;
+    /* font-style: italic; */
     color: #fff;
     text-transform: uppercase;
     font-size: 30px;
     letter-spacing: 2px;
     padding-top: 15px;
     border-top-left-radius: 200%;
-    border-top-right-radius: 200%;
+    border-top-right-radius: 200%; 
     text-shadow: 1px 1px #a76a40;
-}
-
-/* Animações das nuvens */
-.nuvem,
-.nuvem2,
-.nuvem3 {
-    position: absolute;
-    display: inline-block;
-    background-size: 100%;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
 }
 
 .nuvem {
     width: 428px;
     height: 276px;
-    background-image: url("./img/nuvem01.png");
-    animation: slide 30s infinite;
+    position: absolute;
+    overflow: hidden;
+    display: inline-block;
+    background-image: url("img/nuvem01.png");
+    background-size: 100%;
+    animation: slide 30s linear infinite;
 }
 
 .nuvem2 {
     width: 175px;
     height: 110px;
     top: 290px;
-    background-image: url("./img/nuvem02.png");
-    animation: slide2 25s infinite;
+    position: absolute;
+    overflow: hidden;
+    display: inline-block;
+    background-image: url("img/nuvem02.png");
+    background-size: 100%;
+    animation: slide2 25s linear infinite;
 }
 
 .nuvem3 {
     width: 288px;
     height: 184px;
     top: 450px;
-    background-image: url("./img/nuvem03.png");
-    animation: slide3 50s infinite;
+    position: absolute;
+    overflow: hidden;
+    display: inline-block;
+    background-image: url("img/nuvem03.png");
+    background-size: 100%;
+    animation: slide3 50s linear infinite;
 }
 
 @keyframes slide {
-    from { transform: translateX(-100%); }
-    to { transform: translateX(500%); }
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(500%);
+    }
 }
 
 @keyframes slide2 {
-    from { transform: translateX(1000%); }
-    to { transform: translateX(-100%); }
+    from {
+        transform: translateX(1000%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
 }
 
 @keyframes slide3 {
-    from { transform: translateX(-200%); }
-    to { transform: translateX(500%); }
+    from {
+        transform: translateX(-200%);
+    }
+    to {
+        transform: translateX(500%);
+    }
 }
 
-/* Estilos para inputs */
-input[type="text"] {
-    width: 250px;
-    height: 170px;
-    font-family: "Cherry Bomb One", system-ui;
-    font-size: 200px;
-    color: #f1df26;
-    -webkit-text-stroke: 10px #aea11e;
-    text-align: center;
-    background: transparent;
-    border: none;
-    border-bottom: dashed #f1df26 5px;
-    display: inline;
-    margin: 0 20px;
-    padding: 5px;
-}
-
-/* Botões de fechar e posicionamento */
-.close {
-    display: block;
-    font-family: "Cherry Bomb One", system-ui;
-    font-size: 50px;
-    color: #fff;
-    background: linear-gradient(crimson, #c61236);
-    border: 5px solid crimson;
-    width: 30px;
-    left: 35px;
-    top: -160px;
-    border-radius: 100px;
-    text-align: center;
-    position: absolute;
-    padding: 150px 15px 15px 15px;
-}
-
-.right {
-    display: block;
-    font-family: "Cherry Bomb One", system-ui;
-    color: #fff;
-    right: 35px;
-    width: 150px;
-    position: absolute;
-    font-size: 30px;
-    text-align: right;
-    text-shadow: 1px 1px #186685;
-}
-
-/* Estilos para os botões principais */
-.botoes {
-    display: flex;
-    flex-direction: column; /* Garante que os botões fiquem em uma coluna */
-    align-items: center; /* Alinha os botões ao centro */
-    justify-content: center;
-    margin-top: 30px; /* Espaço entre o título e os botões */
-}
-
-.botao {
-    font-family: "Cherry Bomb One", system-ui;
-    color: #fff;
-    font-size: 30px;
-    width: 250px;
-    background: linear-gradient(crimson, #c61236);
-    margin: 10px;
-    text-align: center;
-    vertical-align: center;
-    padding: 20px 0;
-    border-radius: 15px;
-    border: 5px solid #c61236;
-    text-shadow: 2px 2px #c61236;
-}
-
-/* Estilos para a área de texto */
-.botoes textarea {
-    font-family: Arial;
-    color: #000;
-    font-size: 20px;
-    width: 800px;
-    height: 250px;
-    background: rgba(255, 255, 255, 0.7);
-    margin: 3px;
-    text-align: left;
-    vertical-align: center;
-    padding: 20px 0 20px 15px;
-    line-height: 25px;
-    border-radius: 15px;
-    border: 5px solid #a76a40;
-}
 #centro input[type=text]{
     width: 250px;
     height: 170px;

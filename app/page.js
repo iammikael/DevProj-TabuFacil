@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; // Use 'next/navigation' em vez de 'next/router' no Next.js 13
+import { useRouter } from "next/navigation";
 import "./page.css";
 import { User, Lock } from "lucide-react";
 import { useLoginValidation } from "../hooks/loginValidation";
@@ -12,7 +12,7 @@ const Login = () => {
   const [erro, setErro] = useState("");
 
   const { validate } = useLoginValidation();
-  const router = useRouter(); // Iniciando o uso do hook router corretamente
+  const router = useRouter();
 
   const handleLogin = async () => {
     const erroValidacao = validate(usuario, senha);
@@ -20,23 +20,37 @@ const Login = () => {
       setErro(erroValidacao);
       return;
     }
-    setErro("");
 
-    // Faça a requisição ao backend para verificar as credenciais
-    const response = await fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ nome: usuario, senha: senha }),
-    });
+    setErro(""); // Limpa erro anterior
 
-    if (response.ok) {
-      // Redireciona o usuário para a tela principal após login bem-sucedido
-      router.push("/home"); // Rota de exemplo após login bem-sucedido
-    } else {
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nome: usuario, senha }),
+      });
+
       const data = await response.json();
-      setErro(data.error || "Erro desconhecido");
+
+      if (!response.ok) {
+        setErro(data?.error || "Credenciais inválidas");
+        return;
+      }
+
+      // Redirecionamento com base no tipo do usuário
+      switch (data.tipoUsuario) {
+        case "Aluno":
+          router.push("/home");
+          break;
+        case "Professor":
+          router.push("/home-prof");
+          break;
+        default:
+          setErro("Tipo de usuário desconhecido.");
+      }
+    } catch (error) {
+      console.error("Erro ao fazer login:", error);
+      setErro("Erro ao conectar com o servidor.");
     }
   };
 
@@ -73,13 +87,15 @@ const Login = () => {
           />
         </div>
 
+        {/* MENSAGEM DE ERRO */}
         {erro && <p className="erro">{erro}</p>}
 
+        {/* BOTÃO LOGIN */}
         <button className="btn" onClick={handleLogin}>
           ENTRAR
         </button>
 
-        {/* LINK DE REGISTRO (AGORA DENTRO DA LEFT-PANEL) */}
+        {/* LINK DE REGISTRO */}
         <p className="registro-link">
           Não tem conta?{" "}
           <Link href="/registro">

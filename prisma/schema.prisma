@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "./node_modules/@prisma/client"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -12,11 +12,14 @@ model aluno_turma {
   id_usuario Int
   id_turma   Int
 
+  usuario usuario @relation(fields: [id_usuario], references: [id])
+  turma   turma   @relation(fields: [id_turma], references: [id])
+
   @@id([id_usuario, id_turma])
 }
 
 model avisos {
-  id_aviso  Int       @id
+  id_aviso  Int       @id @default(autoincrement())
   data_hora DateTime? @db.DateTime(0)
   titulo    String?   @db.VarChar(45)
   conteudo  Bytes?    @db.Blob
@@ -24,7 +27,7 @@ model avisos {
 }
 
 model comentario {
-  id                   Int       @id
+  id                   Int       @id @default(autoincrement())
   data_hora            DateTime? @db.DateTime(0)
   comentario_aluno     Bytes?    @db.Blob
   comentario_professor String?   @db.VarChar(45)
@@ -42,7 +45,7 @@ model treinamento {
 }
 
 model treinamento_tabuada {
-  id              Int  @id
+  id              Int  @id @default(autoincrement())
   primeiro_numero Int?
   segundo_numero  Int?
   resultado       Int?
@@ -51,18 +54,22 @@ model treinamento_tabuada {
 }
 
 model turma {
-  id           Int     @id
-  nome         String? @db.VarChar(45)
-  media_turma  Float?  @db.Float
+  id           Int           @id @default(autoincrement())
+  nome         String?       @db.VarChar(45)
+  media_turma  Float?        @db.Float
   id_professor Int
+  professor    usuario       @relation("UsuarioTurmas", fields: [id_professor], references: [id])
+  aluno_turma  aluno_turma[]
 }
 
 model usuario {
   id           Int                   @id @default(autoincrement())
   nome         String?               @db.VarChar(45)
-  email        String?               @db.VarChar(45)
+  email        String?               @unique @db.VarChar(45)
   senha        String?               @db.VarChar(45)
   tipo_usuario usuario_tipo_usuario?
+  turmas       turma[]               @relation("UsuarioTurmas")
+  aluno_turma  aluno_turma[]
 }
 
 enum usuario_tipo_usuario {

@@ -1,7 +1,17 @@
+"use client";
 import Head from "next/head";
+import { useRouter } from "next/navigation";
 import "./home.css";
 
 export default function MenuPage() {
+  const router = useRouter();  // Inicializa o hook de navegação
+
+  const handlePlay = () => {
+    router.push("/ModoJogo");  // Redireciona para a página do jogo
+  };
+   const handleAvisos = () => {
+    router.push("/avisos");  // Redireciona para a página do jogo
+  };
   return (
     <>
       <Head>
@@ -20,8 +30,9 @@ export default function MenuPage() {
       <div id="centro_menu">
         <h1>TABUFÁCIL</h1>
         <div className="botoes">
-          <div className="botao">PLAY</div>
+          <div className="botao" onClick={handlePlay}>Jogar</div>
           <div className="botao">Visualizar Treinamentos</div>
+          <div className="botao" onClick={handleAvisos}>Avisos</div>
         </div>
       </div>
 

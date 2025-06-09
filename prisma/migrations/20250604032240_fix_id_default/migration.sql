@@ -1,0 +1,8 @@
+-- AlterTable
+ALTER TABLE `avisos` MODIFY `id_aviso` INTEGER NOT NULL AUTO_INCREMENT;
+
+-- AlterTable
+ALTER TABLE `comentario` MODIFY `id` INTEGER NOT NULL AUTO_INCREMENT;
+
+-- AlterTable
+ALTER TABLE `treinamento_tabuada` MODIFY `id` INTEGER NOT NULL AUTO_INCREMENT;

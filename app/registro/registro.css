@@ -20,7 +20,17 @@ body {
 .logo {
   width: 150px;
 }
+.feedback {
+  font-weight: bold;
+}
 
+.feedback.correto {
+  color: green;
+}
+
+.feedback.errado {
+  color: red;
+}
 .logo-group {
   display: flex;
   flex-direction: row; /* de coluna para linha */
