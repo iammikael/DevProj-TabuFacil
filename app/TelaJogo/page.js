@@ -3,10 +3,11 @@
 import { useEffect, useState, useReducer } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-//TESTE BRANCH RAFA
-
+// ==================================================================
+// MUDANÇAS APLICADAS AQUI -- TESTE RAFAEL
+// ==================================================================
 const TOTAL_QUESTOES = 10; // Alterado de 10 para 25
-const NUMEROS_DA_TABUADA = Array.from({ length: 10  }, (_, i) => i + 1); // Gera um array de 1 a 25
+const NUMEROS_DA_TABUADA = Array.from({ length: 10 }, (_, i) => i + 1); // Gera um array de 1 a 25
 
 // Função auxiliar para embaralhar o array
 function shuffleArray(array) {
@@ -29,6 +30,7 @@ function createInitialState() {
     fimDoJogo: false,
     tempo: 0,
     questoes: [],
+    respostas: [],
   };
 }
 
@@ -54,8 +56,17 @@ function gameReducer(state, action) {
         feedback: {
           show: true,
           message: isCorrect ? 'Resposta correta!' : 'Resposta errada!',
-          isCorrect: isCorrect,
+          isCorrect,
         },
+      respostas: [
+        ...state.respostas,
+        {
+          primeiro_numero: state.numero1,
+          segundo_numero: state.numero2,
+          resultado: state.numero1 * state.numero2,
+          resposta_aluno: respostaUsuario,
+          },
+        ],
       };
     }
     case 'PROXIMA_QUESTAO': {
@@ -111,6 +122,41 @@ export default function TelaJogo() {
     }, 2000);
     return () => clearTimeout(timeout);
   }, [state.feedback]);
+
+  useEffect(() => {
+  if (state.fimDoJogo && state.respostas.length === TOTAL_QUESTOES) {
+    //AQUI
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    if (!usuario) {
+      console.error("Dados do usuário não encontrados.");
+      return;
+    }
+    
+    const dadosParaSalvar = {
+      id_aluno: usuario.id_aluno,     
+      id_turma: usuario.id_turma,
+      id_professor: usuario.id_professor, //ATE AQUI
+      acertos: state.acertos,
+      total_questoes: TOTAL_QUESTOES,
+      respostas: state.respostas,
+    };
+
+    fetch('/api/salvarTreinamentos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dadosParaSalvar),
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log('Treinamento salvo com sucesso!', data);
+        // você pode exibir um alerta, salvar ID, etc.
+      })
+      .catch(err => {
+        console.error('Erro ao salvar treinamento:', err);
+      });
+  }
+}, [state.fimDoJogo]);
+
 
   function handleEnviar(e) {
     e.preventDefault();

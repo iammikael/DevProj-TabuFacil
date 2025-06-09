@@ -37,6 +37,8 @@ const Login = () => {
         return;
       }
 
+       localStorage.setItem("usuario", JSON.stringify(data));
+
       // Redirecionamento com base no tipo do usuário
       switch (data.tipoUsuario) {
         case "Aluno":
