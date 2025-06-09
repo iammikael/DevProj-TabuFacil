@@ -3,6 +3,8 @@
 import { useEffect, useState, useReducer } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
+//TESTE BRANCH RAFA
+
 const TOTAL_QUESTOES = 10; // Alterado de 10 para 25
 const NUMEROS_DA_TABUADA = Array.from({ length: 10  }, (_, i) => i + 1); // Gera um array de 1 a 25
 
