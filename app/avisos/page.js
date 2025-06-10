@@ -1,60 +1,88 @@
 "use client";
 
-import Head from "next/head";
-import "./aviso.css";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import './aviso.css'; 
 
 export default function AvisosPage() {
+  const router = useRouter();
+  
+  const [avisos, setAvisos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // 1. Obter os dados do usuário do localStorage
+    const usuarioString = localStorage.getItem('usuario');
+    
+    // Se não houver dados do usuário, não prosseguir
+    if (!usuarioString) {
+      setError("Usuário não logado. Por favor, faça o login para ver os avisos.");
+      setIsLoading(false);
+      return;
+    }
+    
+    const usuario = JSON.parse(usuarioString);
+    const turmaIdDoAluno = usuario.id_turma;
+
+    // Se o usuário não tiver um ID de turma, não prosseguir
+    if (!turmaIdDoAluno) {
+        setError("Sua conta não está vinculada a nenhuma turma.");
+        setIsLoading(false);
+        return;
+    }
+
+    // 2. Função para buscar os dados da API usando o ID da turma
+    const fetchAvisos = async () => {
+      try {
+        const response = await fetch(`/api/avisos?turmaId=${turmaIdDoAluno}`);
+        if (!response.ok) {
+          throw new Error('Falha ao carregar os dados.');
+        }
+        const data = await response.json();
+        setAvisos(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    // 3. Chamar a função para buscar os avisos
+    fetchAvisos();
+  }, []); // O array vazio [] garante que isso rode apenas uma vez no cliente
+
+  const renderContent = () => {
+    if (isLoading) {
+      return <p style={{ color: 'white', fontSize: '24px' }}>Carregando avisos...</p>;
+    }
+    if (error) {
+      return <p style={{ color: 'red', fontSize: '24px' }}>{error}</p>;
+    }
+    if (avisos.length === 0) {
+      return <p style={{ color: 'white', fontSize: '24px' }}>Nenhum aviso encontrado para esta turma.</p>;
+    }
+    return avisos.map(aviso => (
+      <div key={aviso.id_aviso} className="box_avisos">
+        <h3>{aviso.titulo}</h3>
+        <p>{aviso.conteudo}</p>
+      </div>
+    ));
+  };
+
   return (
     <>
-      <Head>
-        <title>Tabufácil | Avisos</title>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        {/* Google Fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-
       <div className="nuvem"></div>
       <div className="nuvem2"></div>
       <div className="nuvem3"></div>
 
-      {/* Botão Voltar (você pode fazer isso interativo com useRouter) */}
-      <div className="close">
+      <div className="close" onClick={() => router.back()}>
         &lt;
       </div>
 
-      <main id="centro_avisos" style={{ marginTop: 0 }}>
+      <main id="centro_avisos">
         <h2>Mural de Avisos</h2>
-
-        <div className="box_avisos">
-          <h3>Próximo teste a ser realizado: 30/05/2025</h3>
-          <p>
-            Olá alunos! Como combinado em sala de aula, nosso próximo treinamento será realizado
-            dia 30 de Maio de 2025. Sigam a orientação da Silvana, nossa assistente de sala, para
-            que vocês possam entrar no horário e não perderem esse treinamento.
-          </p>
-        </div>
-
-        <div className="box_avisos">
-          <h3>Treinamento de tabuada aleatória</h3>
-          <p>
-            Foi adicionado na nova versão do jogo a opção de treinarmos multiplicação de números
-            aleatórios. Dêem uma conferida ao clicar em "JOGAR" no menu inicial.
-          </p>
-        </div>
-
-        <div className="box_avisos">
-          <h3>Para próxima semana: Tabuada do 7</h3>
-          <p>
-            Estudem e revisem a tabuada do 7. Semana que vem vamos realizar os testes.
-          </p>
-        </div>
+        {renderContent()}
       </main>
     </>
   );
