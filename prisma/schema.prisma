@@ -24,6 +24,7 @@ model avisos {
   titulo    String?   @db.VarChar(45)
   conteudo  Bytes?    @db.Blob
   id_turma  Int
+  turma     turma     @relation(fields: [id_turma], references: [id]) // <-- ADICIONE ESTA LINHA
 }
 
 model comentario {
@@ -60,6 +61,7 @@ model turma {
   id_professor Int
   professor    usuario       @relation("UsuarioTurmas", fields: [id_professor], references: [id])
   aluno_turma  aluno_turma[]
+  avisos        avisos[]      // <-- ADICIONE ESTA LINHA
 }
 
 model usuario {

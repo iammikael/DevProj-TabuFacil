@@ -1,0 +1,89 @@
+/* --- ESTILOS GERAIS DA PÁGINA DE AVISOS --- */
+
+.centroAvisos {
+  position: absolute;
+  width: 90%;
+  max-width: 800px;
+  height: 90%;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  text-align: center;
+  overflow-y: auto; /* Permite rolagem se o conteúdo for grande */
+  padding-top: 20px;
+}
+
+.centroAvisos h2 {
+    font-size: 65px;
+    -webkit-text-stroke: 1px #aea11e;
+    font-family: "Cherry Bomb One", system-ui;
+    color: #f1df26;
+}
+
+.boxAvisos {
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px grey solid;
+  width: 100%;
+  border-radius: 15px;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  text-align: left;
+  margin: 20px auto;
+}
+
+.boxAvisos h3 {
+  font-size: 25px;
+  font-family: "Cherry Bomb One", system-ui;
+  color: crimson;
+  margin: 0 0 10px 0;
+}
+
+/* --- ESTILOS PARA O FORMULÁRIO DE NOVO AVISO --- */
+
+.formNovoAviso {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.formNovoAviso input,
+.formNovoAviso select,
+.formNovoAviso textarea {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+  -webkit-text-stroke: 0;
+  text-align: left;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formNovoAviso textarea {
+  height: 120px;
+  resize: vertical;
+}
+
+.formNovoAviso .botao {
+  width: auto;
+  align-self: flex-end;
+  padding: 10px 25px;
+  font-size: 18px;
+  font-family: "Cherry Bomb One", system-ui;
+  color: #fff;
+  background: linear-gradient(crimson,#c61236);
+  border: 5px solid #c61236;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.formNovoAviso .botao:hover {
+  border: 5px solid crimson;
+  background: linear-gradient(#ad0f2f,crimson);
+}

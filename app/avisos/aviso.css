@@ -311,3 +311,56 @@ input[type=text]{
     border-radius: 15px;
     border: 5px solid #a76a40;
 }
+
+.form-novo-aviso {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espaço entre os campos */
+  margin-top: 15px;
+}
+
+/* Estilo base para todos os campos do formulário para sobrescrever os globais.
+  Isso é o mais importante para corrigir o layout.
+*/
+.form-novo-aviso input[type="text"],
+.form-novo-aviso select,
+.form-novo-aviso textarea {
+  /* Resetando estilos herdados com !important para garantir a prioridade */
+  font-family: Arial, sans-serif !important;
+  font-size: 16px !important;
+  color: #333 !important;
+  -webkit-text-stroke: 0 !important; /* Remove o contorno da fonte */
+  text-align: left !important;
+  background: #fff !important;
+  border: 1px solid #ccc !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+  width: 100% !important;
+  height: auto !important;
+  box-sizing: border-box !important; /* Garante que padding e border não alterem a largura total */
+}
+
+/* Ajuste específico para o textarea */
+.form-novo-aviso textarea {
+  height: 120px !important;
+  resize: vertical; /* Permite que o usuário redimensione a altura */
+}
+
+/* Ajuste para o botão, se necessário, para ele se alinhar */
+.form-novo-aviso .botao {
+  width: auto; /* Deixa o botão se ajustar ao texto */
+  align-self: flex-end; /* Alinha o botão à direita */
+  padding: 10px 25px;
+  font-size: 18px;
+}
+
+/* Mensagens de sucesso ou erro */
+.mensagem-sucesso {
+  color: green;
+  font-weight: bold;
+}
+
+.mensagem-erro {
+  color: crimson;
+  font-weight: bold;
+}

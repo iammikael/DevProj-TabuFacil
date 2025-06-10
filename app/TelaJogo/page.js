@@ -135,13 +135,19 @@ export default function TelaJogo() {
     }
     
     const dadosParaSalvar = {
-      id_aluno: usuario.id_aluno,     
+      id_aluno: usuario.id_usuario,     
       id_turma: usuario.id_turma,
       id_professor: usuario.id_professor, //ATE AQUI
       acertos: state.acertos,
       total_questoes: TOTAL_QUESTOES,
       respostas: state.respostas,
     };
+
+    // --- PONTO DE DEPURAÇÃO ---
+      // Vamos ver o que está sendo enviado
+      console.log("--- DEBUG: Objeto sendo enviado para o back-end ---");
+      console.log(dadosParaSalvar);
+      // -----------------------------
 
     fetch('/api/salvarTreinamentos', {
       method: 'POST',
@@ -254,7 +260,7 @@ const enviarComentario = async () => {
             rows={4}
             style={{ width: '100%', marginTop: '5px', fontSize: '16px', padding: '10px', border: '1px solid #ccc' }}
           ></textarea>
-            <div className="botao" style={{ marginTop: '10px' }} onClick={enviarComentario}>
+            <div className="botao" style={{ marginTop: '10px', width: '100%' }} onClick={enviarComentario}>
               Voltar ao início
             </div>
         </div>
