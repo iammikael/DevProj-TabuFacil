@@ -7,27 +7,14 @@ export default async function handler(req, res) {
 
   const { nome, senha } = req.body;
 
-  console.log("Enviando para o backend:", { nome, senha });
-
   if (!nome || !senha) {
     return res.status(400).json({ error: "Usuário e senha são obrigatórios" });
   }
 
   try {
-    // Busca o usuário pelo nome e inclui as relações com aluno_turma e turma (incluindo o professor)
+    // Passo 1: Encontrar o usuário e verificar a senha
     const usuario = await prisma.usuario.findFirst({
       where: { nome },
-      include: {
-        aluno_turma: {
-          include: {
-            turma: {
-              include: {
-                professor: true // isso traz os dados do professor da turma
-              }
-            }
-          }
-        }
-      }
     });
 
     if (!usuario) {
@@ -38,20 +25,41 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: "Senha incorreta" });
     }
 
-    // Verifica se está vinculado a alguma turma
-    const vinculo = usuario.aluno_turma[0]; // Pega a primeira turma (caso haja mais de uma)
+    // Passo 2: Verificar o tipo de usuário
+    if (usuario.tipo_usuario === 'Aluno') {
+      // --- LÓGICA PARA O ALUNO (permanece a mesma) ---
+      const vinculoAluno = await prisma.aluno_turma.findFirst({
+        where: { id_usuario: usuario.id },
+        include: { turma: true },
+      });
 
-    if (!vinculo || !vinculo.turma) {
-      return res.status(403).json({ error: "Usuário não está vinculado a nenhuma turma" });
+      if (!vinculoAluno || !vinculoAluno.turma) {
+        return res.status(403).json({ error: "Aluno não está vinculado a nenhuma turma" });
+      }
+
+      return res.status(200).json({
+        id_usuario: usuario.id,
+        nome: usuario.nome,
+        tipoUsuario: usuario.tipo_usuario,
+        id_turma: vinculoAluno.id_turma,
+        id_professor: vinculoAluno.turma.id_professor,
+      });
+
+    } else if (usuario.tipo_usuario === 'Professor') {
+      // --- NOVA LÓGICA SIMPLIFICADA PARA O PROFESSOR ---
+      // O professor pode logar sem estar associado a nenhuma turma.
+      // O login é bem-sucedido aqui, retornando apenas os dados do professor.
+      return res.status(200).json({
+        id_usuario: usuario.id,
+        nome: usuario.nome,
+        tipoUsuario: usuario.tipo_usuario,
+        // Não retornamos id_turma, pois ele pode ter várias ou nenhuma.
+        // O front-end decidirá o que fazer a seguir com um usuário professor.
+      });
+      
+    } else {
+      return res.status(403).json({ error: "Tipo de usuário não permitido para login ou não definido." });
     }
-
-    return res.status(200).json({
-      id_aluno: usuario.id,
-      nome: usuario.nome,
-      tipoUsuario: usuario.tipo_usuario,
-      id_turma: vinculo.turma.id,
-      id_professor: vinculo.turma.id_professor,
-    });
 
   } catch (error) {
     console.error("Erro no login:", error);

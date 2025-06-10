@@ -216,7 +216,7 @@ h2{
     color: #fff;
     right: 35px;
     border: 3px none;
-    width: 150px;
+    width: 250px;
     position: absolute;
     font-size: 30px;
     text-align: right;
@@ -259,6 +259,15 @@ h2{
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+}
+
+.areatexto {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 14px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .box_correcao textarea {

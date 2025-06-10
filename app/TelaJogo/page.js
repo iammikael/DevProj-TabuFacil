@@ -97,6 +97,8 @@ export default function TelaJogo() {
   const [state, dispatch] = useReducer(gameReducer, createInitialState());
   const [isMounted, setIsMounted] = useState(false);
   const [resposta, setResposta] = useState('');
+  const [comentario, setComentario] = useState('');
+  const [idTreinamento, setIdTreinamento] = useState(null);
 
   // Efeitos (lógica) permanecem os mesmos...
   useEffect(() => {
@@ -149,6 +151,7 @@ export default function TelaJogo() {
       .then(res => res.json())
       .then(data => {
         console.log('Treinamento salvo com sucesso!', data);
+        setIdTreinamento(data.id); //id do treinamento aqui
         // você pode exibir um alerta, salvar ID, etc.
       })
       .catch(err => {
@@ -157,6 +160,25 @@ export default function TelaJogo() {
   }
 }, [state.fimDoJogo]);
 
+const enviarComentario = async () => {
+  console.log("Enviando comentário:", comentario, "ID:", idTreinamento);
+  
+  if (!comentario.trim() || !idTreinamento) {
+    console.warn("Comentário ou ID do treinamento ausente.");
+    return router.push('/home');
+  }
+
+  await fetch('/api/comentario', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      id_treinamento: idTreinamento,
+      comentario_aluno: comentario,
+    }),
+  });
+
+  router.push('/home');
+};
 
   function handleEnviar(e) {
     e.preventDefault();
@@ -179,8 +201,8 @@ export default function TelaJogo() {
       <div className="close" onClick={() => router.back()}>x</div>
 
       <div className="right">
-        {state.questaoAtual} de {TOTAL_QUESTOES} ⏱️<br/>
-        {tempoFormatado}
+        {state.questaoAtual} de {TOTAL_QUESTOES}<br/>
+        ⏱️ {tempoFormatado}
       </div>
 
       <div id="centro">
@@ -219,16 +241,23 @@ export default function TelaJogo() {
 
           </form>
         ) : (
-          <div className="fim-jogo" style={{ textAlign: 'center' }}>
-            <div style={{ fontSize:'30px'}}>
+        <div className="fim-jogo" style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '30px' }}>
             <h2>Fim do jogo!</h2>
-            <p>Você acertou {state.acertos} de {TOTAL_QUESTOES}</p>
-            <p>Tempo total: {tempoFormatado}</p>
-            </div>
-            <div className="botao" onClick={() => router.push('/ModoJogo')}>
+            <p>Você acertou {state.acertos} de {TOTAL_QUESTOES} | Tempo total: {tempoFormatado}</p>
+          </div>
+
+          <textarea className="areatexto"
+            placeholder="O que você achou do treinamento realizado?"
+            value={comentario}
+            onChange={(e) => setComentario(e.target.value)}
+            rows={4}
+            style={{ width: '100%', marginTop: '5px', fontSize: '16px', padding: '10px', border: '1px solid #ccc' }}
+          ></textarea>
+            <div className="botao" style={{ marginTop: '10px' }} onClick={enviarComentario}>
               Voltar ao início
             </div>
-          </div>
+        </div>
         )}
       </div>
     </div>
