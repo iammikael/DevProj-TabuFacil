@@ -12,6 +12,9 @@ export default function ProfessorPage() {
   const handleTurmas = () => {
     router.push("/turmas");
   };
+  const handleTreinamentos = () => {
+    router.push("/treinamentosLista");
+  };
 
   return (
     <>
@@ -25,7 +28,7 @@ export default function ProfessorPage() {
         <h1>TABUFÁCIL</h1>
         <h3>professor</h3> 
         <nav className="botoes">
-          <div className="botao" onClick={() => alert('Função a ser implementada!')}>
+          <div className="botao" onClick={handleTreinamentos}>
             Corrigir Treinamentos
           </div>
           <div className="botao" onClick={handleAviso}>

@@ -43,6 +43,9 @@ model treinamento {
   id_aluno       Int
   id_turma       Int
   id_professor   Int
+
+  aluno          usuario   @relation("AlunoTreinamentos", fields: [id_aluno], references: [id])
+  turma          turma     @relation("TurmaTreinamentos", fields: [id_turma], references: [id])
 }
 
 model treinamento_tabuada {
@@ -61,7 +64,9 @@ model turma {
   id_professor Int
   professor    usuario       @relation("UsuarioTurmas", fields: [id_professor], references: [id])
   aluno_turma  aluno_turma[]
-  avisos        avisos[]      // <-- ADICIONE ESTA LINHA
+  avisos        avisos[]     
+
+  treinamentos   treinamento[] @relation("TurmaTreinamentos")
 }
 
 model usuario {
@@ -72,6 +77,8 @@ model usuario {
   tipo_usuario usuario_tipo_usuario?
   turmas       turma[]               @relation("UsuarioTurmas")
   aluno_turma  aluno_turma[]
+
+  treinamentos   treinamento[] @relation("AlunoTreinamentos")
 }
 
 enum usuario_tipo_usuario {
