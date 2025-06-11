@@ -27,7 +27,7 @@ export default function ProfessorPage() {
       <main id="centro_menu">
         <h1>TABUFÁCIL</h1>
         <h3>professor</h3> 
-        <nav className="botoes">
+        <nav className="botoes" style={{marginTop: "-20px"}}>
           <div className="botao" onClick={handleTreinamentos}>
             Corrigir Treinamentos
           </div>

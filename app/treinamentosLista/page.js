@@ -84,7 +84,7 @@ export default function TreinamentosListaPage() {
               <td>{treino.avaliacao_prof ? <b>{treino.avaliacao_prof}</b> : ''}</td>
               <td>
                 {/* O link agora é dinâmico, apontando para uma página de detalhes com o ID */}
-                <Link href={`/treinamentos/detalhe/${treino.id}`}>Abrir</Link>
+                <Link href={`/treinamento/${treino.id}`}>Abrir</Link>
               </td>
             </tr>
           ))}

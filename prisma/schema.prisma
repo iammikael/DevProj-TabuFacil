@@ -33,19 +33,24 @@ model comentario {
   comentario_aluno     Bytes?    @db.Blob
   comentario_professor String?   @db.VarChar(45)
   id_treinamento       Int
+
+  treinamento          treinamento  @relation(fields: [id_treinamento], references: [id]) 
 }
 
 model treinamento {
   id             Int       @id @default(autoincrement())
   data_hora      DateTime? @db.DateTime(0)
   media_acertos  Float?    @db.Float
-  avaliacao_prof Int?      @db.SmallInt
+  avaliacao_prof        String?                 @db.VarChar(45)
   id_aluno       Int
   id_turma       Int
   id_professor   Int
 
   aluno          usuario   @relation("AlunoTreinamentos", fields: [id_aluno], references: [id])
   turma          turma     @relation("TurmaTreinamentos", fields: [id_turma], references: [id])
+
+  comentarios           comentario[]           
+  respostas_tabuada     treinamento_tabuada[]  
 }
 
 model treinamento_tabuada {
@@ -55,6 +60,8 @@ model treinamento_tabuada {
   resultado       Int?
   resposta_aluno  Int?
   id_treinamento  Int
+
+  treinamento       treinamento @relation(fields: [id_treinamento], references: [id])
 }
 
 model turma {

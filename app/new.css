@@ -193,6 +193,7 @@ h2{
     padding: 5px;
 }
 
+/*
 .close{
     display:block;
     font-family: "Cherry Bomb One", system-ui;
@@ -207,8 +208,8 @@ h2{
     text-align: center;
     position: absolute;
     padding: 150px 15px 15px 15px;
-    /*-webkit-text-stroke: 10px #af3a27;*/
-}
+    /*-webkit-text-stroke: 10px #af3a27;
+}*/
 
 .right {
     display: block;

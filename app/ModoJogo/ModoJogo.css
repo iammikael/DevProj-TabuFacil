@@ -196,7 +196,7 @@ h2{
     }
 }
 
-input[type=text]{
+#centro input[type=text]{
     width: 250px;
     height: 170px;
     font-family: "Cherry Bomb One", system-ui;

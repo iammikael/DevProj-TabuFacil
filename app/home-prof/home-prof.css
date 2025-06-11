@@ -177,7 +177,7 @@ h2{
     }
 }
 
-input[type=text]{
+#centro input[type=text]{
     width: 250px;
     height: 170px;
     font-family: "Cherry Bomb One", system-ui;
@@ -229,6 +229,74 @@ input[type=text]{
     align-items: center;
     justify-content: center;
 }
+
+.box_correcao{
+    background: rgba(255, 255, 255, 0.7);
+    border: 2px grey solid;
+    width: 750px;
+    border-radius: 15px;
+    font-family: Arial;
+    padding: 15px;
+    text-align: left;
+    margin-bottom: 10px;
+    margin: auto auto 10px auto;
+}
+
+.box_correcao label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.box_correcao input[type="text"],
+.box_correcao input[type="datetime-local"],
+.box_correcao textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 14px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.box_correcao textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+.box_correcao button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #25a4d7;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.box_correcao button:hover {
+    background-color: #1c85b2;
+}
+
+/*.box_correcao input[type=text] {
+  width: 250px;
+  height: 170px;
+  font-family: "Cherry Bomb One", system-ui;
+  font-size: 200px;
+  color: #f1df26;
+  -webkit-text-stroke: 10px #aea11e;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-bottom: dashed #f1df26 5px;
+  display: inline;
+  margin: 0px 20px 0px 20px;
+  padding: 5px;
+}*/
 
 .box_avisos{
     background: rgba(255, 255, 255, 0.7);
