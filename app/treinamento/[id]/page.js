@@ -129,7 +129,7 @@ export default function DetalheTreinamentoPage() {
             <textarea id="obsProfessor" value={obsProfessor} onChange={(e) => setObsProfessor(e.target.value)} disabled={!isProfessor} />
 
             <label htmlFor="nota">Nota:</label>
-            <input type="text" id="nota" value={nota} onChange={(e) => setNota(e.target.value)} disabled={!isProfessor} />
+            <input type="text" style={{backgroundColor: "white"}} id="nota" value={nota} onChange={(e) => setNota(e.target.value)} disabled={!isProfessor} />
 
             {isProfessor && <button type="submit">Enviar Correção</button>}
           </form>

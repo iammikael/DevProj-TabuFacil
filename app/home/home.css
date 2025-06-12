@@ -7,11 +7,7 @@
     font-display: swap;
   }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+
 
 /* Estilos principais */
 body {
@@ -53,12 +49,12 @@ h1 {
     align-items: center; /* Centraliza os itens horizontalmente */
     justify-content: center; /* Centraliza os itens verticalmente */
 }
+
 .texto-central{
     font-size: 65px;
     -webkit-text-stroke: 1px #aea11e;
     font-family: "Cherry Bomb One", system-ui;
     color: #f1df26;
-    padding-left: 21%;
 }
 
 #centro h1,

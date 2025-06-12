@@ -177,7 +177,7 @@ h2{
     }
 }
 
-input[type=text]{
+/*input[type=text]{
     width: 250px;
     height: 170px;
     font-family: "Cherry Bomb One", system-ui;
@@ -191,7 +191,7 @@ input[type=text]{
     display: inline;
     margin: 0px 20px 0px 20px;
     padding: 5px;
-}
+}*/
 
 .close{
     display:block;
@@ -337,7 +337,6 @@ input[type=text]{
   padding: 10px !important;
   width: 100% !important;
   height: auto !important;
-  box-sizing: border-box !important; /* Garante que padding e border não alterem a largura total */
 }
 
 /* Ajuste específico para o textarea */

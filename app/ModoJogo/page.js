@@ -19,6 +19,10 @@ export default function EscolherTabuadaPage() {
   return (
     <>
 
+      <div className="nuvem"></div>
+      <div className="nuvem2"></div>
+      <div className="nuvem3"></div>
+
       <div className="close" onClick={() => router.back()}>&lt;</div>
 
       <div id="centro_menu" style={{ marginTop: 0 }}>
