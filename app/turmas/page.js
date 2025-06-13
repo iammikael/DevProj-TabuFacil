@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import './turmas.css'; // Crie este arquivo CSS na mesma pasta
+import './turmas.css'; 
 
 export default function TurmasPage() {
   const router = useRouter();
@@ -13,7 +13,6 @@ export default function TurmasPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Função para buscar/recarregar a lista de turmas
   const fetchTurmas = async (professorId) => {
     try {
       const response = await fetch(`/api/turmasCadastro?professorId=${professorId}`);
@@ -52,8 +51,8 @@ export default function TurmasPage() {
       });
       if (!response.ok) throw new Error('Falha ao criar a turma.');
       
-      setNomeNovaTurma(''); // Limpa o input
-      fetchTurmas(usuario.id_usuario); // Recarrega a lista
+      setNomeNovaTurma(''); 
+      fetchTurmas(usuario.id_usuario); 
     } catch (err) {
       setError(err.message);
     }

@@ -12,7 +12,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Verifica se o usuário ou e-mail já existem
     const usuarioExistente = await prisma.usuario.findFirst({
       where: {
         OR: [{ nome: usuario }, { email: email }],
@@ -23,7 +22,6 @@ export default async function handler(req, res) {
       return res.status(400).json({ mensagem: "Usuário ou e-mail já cadastrado." });
     }
 
-    // Cria o usuário
     const novoUsuario = await prisma.usuario.create({
       data: {
         nome: usuario,
@@ -33,7 +31,6 @@ export default async function handler(req, res) {
       },
     });
 
-    // Se for professor, cria nova turma
     if (tipoUsuario === "Professor") {
       if (!nomeTurma) {
         return res.status(400).json({ mensagem: "Nome da turma é obrigatório para professor." });
@@ -42,7 +39,7 @@ export default async function handler(req, res) {
       await prisma.turma.create({
         data: {
           nome: nomeTurma,
-          id_professor: novoUsuario.id, // não passa o ID manualmente!
+          id_professor: novoUsuario.id, 
         },
       });
 

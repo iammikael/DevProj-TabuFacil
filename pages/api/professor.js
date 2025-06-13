@@ -1,4 +1,3 @@
-// /pages/api/turmas/professor.ts
 import { prisma } from "../../lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
@@ -16,7 +15,6 @@ export default async function handler(req, res) {
       id_professor: professorId,
     },
     include: {
-      // alunos da turma via relação manual
       aluno_turma: {
         include: {
           usuario: true,
@@ -25,7 +23,6 @@ export default async function handler(req, res) {
     },
   });
 
-  // Adaptar estrutura para facilitar uso no front-end
   const resposta = turmas.map((turma) => ({
     id: turma.id,
     nome: turma.nome,

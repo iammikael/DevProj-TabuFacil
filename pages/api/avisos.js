@@ -3,7 +3,6 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
-  // --- LÓGICA PARA BUSCAR AVISOS (GET) ---
   if (req.method === 'GET') {
     const { turmaId, professorId } = req.query;
 
@@ -11,17 +10,14 @@ export default async function handler(req, res) {
       let whereClause = {};
 
       if (turmaId) {
-        // Se for um aluno, busca pela turma específica
         whereClause = { id_turma: parseInt(turmaId) };
       } else if (professorId) {
-        // Se for um professor, primeiro busca todas as suas turmas
         const turmasDoProfessor = await prisma.turma.findMany({
           where: { id_professor: parseInt(professorId) },
-          select: { id: true }, // seleciona apenas os IDs
+          select: { id: true },
         });
         const idsDasTurmas = turmasDoProfessor.map(t => t.id);
         
-        // Depois, busca avisos que pertencem a qualquer uma dessas turmas
         whereClause = { id_turma: { in: idsDasTurmas } };
       } else {
         return res.status(400).json({ error: 'É necessário fornecer um ID de turma ou de professor.' });
@@ -30,7 +26,7 @@ export default async function handler(req, res) {
       const avisosDb = await prisma.avisos.findMany({
         where: whereClause,
         orderBy: { data_hora: 'desc' },
-        include: { turma: { select: { nome: true } } }, // Inclui o nome da turma no aviso
+        include: { turma: { select: { nome: true } } }, 
       });
 
       const avisos = avisosDb.map(aviso => ({
@@ -45,7 +41,6 @@ export default async function handler(req, res) {
     }
   }
 
-  // --- LÓGICA PARA CRIAR AVISOS (POST) ---
   if (req.method === 'POST') {
     try {
       const { titulo, conteudo, id_turma } = req.body;
@@ -57,7 +52,7 @@ export default async function handler(req, res) {
       const novoAviso = await prisma.avisos.create({
         data: {
           titulo: titulo,
-          conteudo: Buffer.from(conteudo, 'utf-8'), // Converte o texto para Buffer antes de salvar
+          conteudo: Buffer.from(conteudo, 'utf-8'), 
           id_turma: parseInt(id_turma),
           data_hora: new Date(),
         },
@@ -70,6 +65,5 @@ export default async function handler(req, res) {
     }
   }
 
-  // Se for qualquer outro método (PUT, DELETE, etc.)
   return res.status(405).json({ error: `Método ${req.method} não permitido` });
 }

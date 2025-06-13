@@ -21,7 +21,7 @@ const Login = () => {
       return;
     }
 
-    setErro(""); // Limpa erro anterior
+    setErro("");
 
     try {
       const response = await fetch("/api/login", {
@@ -39,7 +39,7 @@ const Login = () => {
 
        localStorage.setItem("usuario", JSON.stringify(data));
 
-      // Redirecionamento com base no tipo do usuário
+     
       switch (data.tipoUsuario) {
         case "Aluno":
           router.push("/home");

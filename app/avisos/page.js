@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import './aviso.css'; 
 
-// --- Componente do Formulário do Professor ---
 const FormularioAviso = ({ turmas, idProfessor, onAvisoCriado }) => {
   const [titulo, setTitulo] = useState('');
   const [conteudo, setConteudo] = useState('');
@@ -27,7 +26,6 @@ const FormularioAviso = ({ turmas, idProfessor, onAvisoCriado }) => {
     margin: '5px 0'
   };
 
-  // Estilo específico para o textarea, herdando o estilo base
   const textareaStyle = {
     ...formFieldStyle,
     height: '120px',
@@ -52,10 +50,8 @@ const FormularioAviso = ({ turmas, idProfessor, onAvisoCriado }) => {
       if (!response.ok) throw new Error('Falha ao criar o aviso.');
       
       setMensagem({ texto: 'Aviso criado com sucesso!', tipo: 'sucesso' });
-      // Limpa o formulário
       setTitulo('');
       setConteudo('');
-      // Chama a função do pai para atualizar a lista de avisos
       onAvisoCriado();
 
     } catch (error) {
@@ -84,7 +80,6 @@ const FormularioAviso = ({ turmas, idProfessor, onAvisoCriado }) => {
 };
 
 
-// --- Componente Principal da Página ---
 export default function AvisosPage() {
   const router = useRouter();
   
@@ -95,7 +90,6 @@ export default function AvisosPage() {
   const [error, setError] = useState(null);
 
   const fetchAvisos = async () => {
-    // Busca os dados do usuário a cada vez para garantir que está atualizado
     const usuarioLogado = JSON.parse(localStorage.getItem('usuario'));
     if (!usuarioLogado) return;
 
@@ -130,7 +124,6 @@ export default function AvisosPage() {
       }
       setUsuario(usuarioLogado);
 
-      // Se for professor, busca também a lista de turmas dele
       if (usuarioLogado.tipoUsuario === 'Professor') {
         try {
           const resTurmas = await fetch(`/api/turmaAvisos?professorId=${usuarioLogado.id_usuario}`);
@@ -178,7 +171,7 @@ export default function AvisosPage() {
           <FormularioAviso 
             turmas={turmasProfessor} 
             idProfessor={usuario.id_usuario} 
-            onAvisoCriado={fetchAvisos} // Passa a função para recarregar a lista
+            onAvisoCriado={fetchAvisos}
           />
         )}
         <div className="lista_avisos">

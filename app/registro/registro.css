@@ -33,11 +33,11 @@ body {
 }
 .logo-group {
   display: flex;
-  flex-direction: row; /* de coluna para linha */
+  flex-direction: row; 
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  gap: 6px; /* espaçamento entre os itens */
+  gap: 6px; 
 }
 
 .text-group {

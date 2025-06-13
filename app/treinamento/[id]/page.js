@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import './treinamento.module.css'; // Use seu CSS
+import './treinamento.module.css';
 
 export default function DetalheTreinamentoPage() {
   const router = useRouter();
   const params = useParams();
-  const { id } = params; // Pega o ID da URL
+  const { id } = params;
 
   const [treinamento, setTreinamento] = useState(null);
   const [obsProfessor, setObsProfessor] = useState('');
@@ -19,13 +19,11 @@ export default function DetalheTreinamentoPage() {
   const isProfessor = usuario?.tipoUsuario === 'Professor';
 
   useEffect(() => {
-    // Busca o usuário logado
     const usuarioLogado = JSON.parse(localStorage.getItem('usuario'));
     if (usuarioLogado) {
       setUsuario(usuarioLogado);
     }
 
-    // Busca os dados do treinamento se o ID estiver disponível
     if (id) {
       const fetchDetalhes = async () => {
         try {
@@ -33,7 +31,7 @@ export default function DetalheTreinamentoPage() {
           if (!response.ok) throw new Error('Falha ao buscar dados do treinamento.');
           const data = await response.json();
           setTreinamento(data);
-          // Preenche os campos de correção se já existirem dados
+
           setObsProfessor(data.comentarios[0]?.comentario_professor || '');
           setNota(data.avaliacao_prof || '');
         } catch (err) {
@@ -56,7 +54,7 @@ export default function DetalheTreinamentoPage() {
         });
         if (!response.ok) throw new Error('Falha ao salvar a correção.');
         alert('Correção salva com sucesso!');
-        router.push('/treinamentosLista'); // Volta para a lista
+        router.push('/treinamentosLista'); 
     } catch (err) {
         setError(err.message);
         alert(`Erro: ${err.message}`);
@@ -67,7 +65,6 @@ export default function DetalheTreinamentoPage() {
   if (error) return <p style={{color: 'red'}}>Erro: {error}</p>;
   if (!treinamento) return <p>Treinamento não encontrado.</p>;
 
-  // Formata os dados para exibição
   const dataFormatada = new Date(treinamento.data_hora).toISOString().slice(0, 16);
   const mediaFormatada = (treinamento.media_acertos * 10).toFixed(2);
   const obsAluno = treinamento.comentarios[0]?.comentario_aluno || 'Nenhuma observação do aluno.';

@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth"; // ajuste se necessário
+import { authOptions } from "../api/auth"; 
 import { prisma } from "../../lib/prisma";
 
 export default async function handler(req, res) {
@@ -8,7 +8,6 @@ export default async function handler(req, res) {
 
   try {
     if (req.method === 'GET') {
-      // Se NÃO estiver logado, retorna todas as turmas (para cadastro de aluno)
       if (!session) {
         const turmas = await prisma.turma.findMany({
           select: { id: true, nome: true, media_turma: true },
@@ -17,7 +16,6 @@ export default async function handler(req, res) {
         return res.status(200).json(turmas);
       }
 
-      // Se ESTIVER logado, busca o professor e filtra as turmas
       const professor = await prisma.usuario.findUnique({
         where: { nome: session.user.nome },
       });

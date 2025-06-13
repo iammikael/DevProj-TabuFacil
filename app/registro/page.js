@@ -19,8 +19,8 @@ const Register = () => {
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [tipo, setTipo] = useState("Aluno");
-  const [nomeTurma, setNomeTurma] = useState(""); // Professor
-  const [idTurma, setIdTurma] = useState("");     // Aluno
+  const [nomeTurma, setNomeTurma] = useState(""); 
+  const [idTurma, setIdTurma] = useState("");     
   const [erro, setErro] = useState("");
 
   const [turmasDisponiveis, setTurmasDisponiveis] = useState([]);
@@ -40,7 +40,7 @@ const Register = () => {
 
           const data = await response.json();
           setTurmasDisponiveis(data);
-          setIdTurma(""); // Forçar escolha manual
+          setIdTurma("");
         } catch (error) {
           console.error("Erro ao buscar turmas:", error);
           setErro(error.message || "Não foi possível carregar as turmas.");

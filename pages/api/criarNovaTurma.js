@@ -15,7 +15,6 @@ export default async function handler(req, res) {
   const email = session.user.email;
 
   try {
-    // Buscar o usuário no banco de dados pelo email
     const professor = await prisma.usuario.findUnique({
       where: { email },
     });

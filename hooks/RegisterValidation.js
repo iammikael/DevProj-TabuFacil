@@ -8,7 +8,6 @@ export const useRegisterValidation = () => {
       return "O nome de usuário deve ter pelo menos 3 caracteres.";
     }
 
-    // validação correta de email 
     if (!email.includes("@") || email.length < 5) {
       return "Informe um e-mail válido.";
     }
@@ -21,7 +20,7 @@ export const useRegisterValidation = () => {
       return "As senhas não coincidem.";
     }
 
-    return ""; // sem erro
+    return "";
   };
 
   return { validate };

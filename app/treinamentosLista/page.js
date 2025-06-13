@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import './treinamentosLista.css'; // Usando seu CSS existente
+import './treinamentosLista.css'; 
 
 export default function TreinamentosListaPage() {
   const router = useRouter();
@@ -14,7 +14,6 @@ export default function TreinamentosListaPage() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Busca os dados do usuário logado e, em seguida, os treinamentos
     const carregarDados = async () => {
       const usuarioLogado = JSON.parse(localStorage.getItem('usuario'));
       if (!usuarioLogado) {
@@ -24,7 +23,6 @@ export default function TreinamentosListaPage() {
       }
       setUsuario(usuarioLogado);
 
-      // Constrói a URL da API com base no tipo de usuário
       let apiUrl = '';
       if (usuarioLogado.tipoUsuario === 'Aluno') {
         apiUrl = `/api/treinamentos?alunoId=${usuarioLogado.id_usuario}`;
@@ -83,7 +81,7 @@ export default function TreinamentosListaPage() {
               <td>{treino.media_acertos.toFixed(2)*10}</td>
               <td>{treino.avaliacao_prof ? <b>{treino.avaliacao_prof}</b> : ''}</td>
               <td>
-                {/* O link agora é dinâmico, apontando para uma página de detalhes com o ID */}
+                {/* Aponta para uma página de detalhes com o ID */}
                 <Link href={`/treinamento/${treino.id}`}>Abrir</Link>
               </td>
             </tr>

@@ -3,13 +3,11 @@
 import { useEffect, useState, useReducer } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-// ==================================================================
-// MUDANÇAS APLICADAS AQUI -- TESTE RAFAEL
-// ==================================================================
-const TOTAL_QUESTOES = 10; // Alterado de 10 para 25
-const NUMEROS_DA_TABUADA = Array.from({ length: 10 }, (_, i) => i + 1); // Gera um array de 1 a 25
 
-// Função auxiliar para embaralhar o array
+const TOTAL_QUESTOES = 10; 
+const NUMEROS_DA_TABUADA = Array.from({ length: 10 }, (_, i) => i + 1); 
+
+
 function shuffleArray(array) {
   const newArr = [...array];
   for (let i = newArr.length - 1; i > 0; i--) {
@@ -19,7 +17,7 @@ function shuffleArray(array) {
   return newArr;
 }
 
-// A função de estado inicial
+
 function createInitialState() {
   return {
     questaoAtual: 1,
@@ -34,7 +32,6 @@ function createInitialState() {
   };
 }
 
-// A função reducer que gerencia as ações do jogo
 function gameReducer(state, action) {
   switch (action.type) {
     case 'INICIAR_JOGO': {
@@ -90,7 +87,6 @@ function gameReducer(state, action) {
   }
 }
 
-// O componente React
 export default function TelaJogo() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -100,7 +96,6 @@ export default function TelaJogo() {
   const [comentario, setComentario] = useState('');
   const [idTreinamento, setIdTreinamento] = useState(null);
 
-  // Efeitos (lógica) permanecem os mesmos...
   useEffect(() => {
     setIsMounted(true);
     const param = searchParams.get('tabuada') || '2';
@@ -127,7 +122,7 @@ export default function TelaJogo() {
 
   useEffect(() => {
   if (state.fimDoJogo && state.respostas.length === TOTAL_QUESTOES) {
-    //AQUI
+    
     const usuario = JSON.parse(localStorage.getItem('usuario'));
     if (!usuario) {
       console.error("Dados do usuário não encontrados.");
@@ -137,17 +132,16 @@ export default function TelaJogo() {
     const dadosParaSalvar = {
       id_aluno: usuario.id_usuario,     
       id_turma: usuario.id_turma,
-      id_professor: usuario.id_professor, //ATE AQUI
+      id_professor: usuario.id_professor, 
       acertos: state.acertos,
       total_questoes: TOTAL_QUESTOES,
       respostas: state.respostas,
     };
 
-    // --- PONTO DE DEPURAÇÃO ---
-      // Vamos ver o que está sendo enviado
+
       console.log("--- DEBUG: Objeto sendo enviado para o back-end ---");
       console.log(dadosParaSalvar);
-      // -----------------------------
+     
 
     fetch('/api/salvarTreinamentos', {
       method: 'POST',
@@ -157,8 +151,7 @@ export default function TelaJogo() {
       .then(res => res.json())
       .then(data => {
         console.log('Treinamento salvo com sucesso!', data);
-        setIdTreinamento(data.id); //id do treinamento aqui
-        // você pode exibir um alerta, salvar ID, etc.
+        setIdTreinamento(data.id); 
       })
       .catch(err => {
         console.error('Erro ao salvar treinamento:', err);
@@ -198,7 +191,6 @@ const enviarComentario = async () => {
     return null;
   }
 
-  // O JSX (bloco de renderização) permanece o mesmo
   return (
     <div>
       <div className="nuvem"></div>

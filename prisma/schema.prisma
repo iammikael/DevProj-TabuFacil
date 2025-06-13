@@ -24,7 +24,7 @@ model avisos {
   titulo    String?   @db.VarChar(45)
   conteudo  Bytes?    @db.Blob
   id_turma  Int
-  turma     turma     @relation(fields: [id_turma], references: [id]) // <-- ADICIONE ESTA LINHA
+  turma     turma     @relation(fields: [id_turma], references: [id])
 }
 
 model comentario {

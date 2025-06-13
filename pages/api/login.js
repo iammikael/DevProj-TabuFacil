@@ -12,7 +12,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Passo 1: Encontrar o usuário e verificar a senha
     const usuario = await prisma.usuario.findFirst({
       where: { nome },
     });
@@ -25,9 +24,7 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: "Senha incorreta" });
     }
 
-    // Passo 2: Verificar o tipo de usuário
     if (usuario.tipo_usuario === 'Aluno') {
-      // --- LÓGICA PARA O ALUNO (permanece a mesma) ---
       const vinculoAluno = await prisma.aluno_turma.findFirst({
         where: { id_usuario: usuario.id },
         include: { turma: true },
@@ -46,15 +43,10 @@ export default async function handler(req, res) {
       });
 
     } else if (usuario.tipo_usuario === 'Professor') {
-      // --- NOVA LÓGICA SIMPLIFICADA PARA O PROFESSOR ---
-      // O professor pode logar sem estar associado a nenhuma turma.
-      // O login é bem-sucedido aqui, retornando apenas os dados do professor.
       return res.status(200).json({
         id_usuario: usuario.id,
         nome: usuario.nome,
         tipoUsuario: usuario.tipo_usuario,
-        // Não retornamos id_turma, pois ele pode ter várias ou nenhuma.
-        // O front-end decidirá o que fazer a seguir com um usuário professor.
       });
       
     } else {

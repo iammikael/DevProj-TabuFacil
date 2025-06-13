@@ -7,7 +7,5 @@ export function validateLogin(usuario, senha) {
       return "A senha deve ter pelo menos 6 caracteres.";
     }
   
-    // Pode adicionar mais validações aqui, se quiser
-  
-    return null; // null = sem erros
+    return null;
   }

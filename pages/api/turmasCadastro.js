@@ -1,8 +1,7 @@
-import { prisma } from '../../lib/prisma'; // Ajuste o caminho se necessário
+import { prisma } from '../../lib/prisma';
 
 export default async function handler(req, res) {
   
-  // --- BUSCAR TURMAS COM MÉDIA (GET) ---
   if (req.method === 'GET') {
     const { professorId } = req.query;
     if (!professorId) {
@@ -10,12 +9,10 @@ export default async function handler(req, res) {
     }
 
     try {
-      // 1. Busca todas as turmas do professor
       const turmas = await prisma.turma.findMany({
         where: { id_professor: parseInt(professorId) },
       });
 
-      // 2. Calcula a média para cada turma
       const turmasComMedia = await Promise.all(
         turmas.map(async (turma) => {
           const agregacao = await prisma.treinamento.aggregate({
@@ -24,7 +21,7 @@ export default async function handler(req, res) {
           });
           return {
             ...turma,
-            media_turma: (agregacao._avg.media_acertos || 0) * 10, // Multiplica por 10 e garante 0 se for null
+            media_turma: (agregacao._avg.media_acertos || 0) * 10, 
           };
         })
       );
@@ -36,7 +33,7 @@ export default async function handler(req, res) {
     }
   }
 
-  // --- CRIAR NOVA TURMA (POST) ---
+
   if (req.method === 'POST') {
     try {
       const { nome, id_professor } = req.body;
@@ -48,7 +45,7 @@ export default async function handler(req, res) {
         data: {
           nome,
           id_professor: parseInt(id_professor),
-          media_turma: 0, // Inicia com média 0
+          media_turma: 0, 
         },
       });
 
@@ -59,6 +56,5 @@ export default async function handler(req, res) {
     }
   }
 
-  // Se for outro método
   return res.status(405).json({ error: `Método ${req.method} não permitido` });
 }

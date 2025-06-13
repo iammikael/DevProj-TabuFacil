@@ -9,7 +9,6 @@
 
 
 
-/* Estilos principais */
 body {
     background-image: linear-gradient(to bottom right, #25a4d7, #80b8d8);
     background-attachment: fixed;
@@ -32,7 +31,6 @@ h1 {
     margin: 0 20px;
 }
 
-/* Centralização do conteúdo */
 #centro,
 #centro_menu {
     position: absolute;
@@ -45,9 +43,9 @@ h1 {
     bottom: 0;
     text-align: center;
     display: flex;
-    flex-direction: column; /* Alinha os itens na vertical */
-    align-items: center; /* Centraliza os itens horizontalmente */
-    justify-content: center; /* Centraliza os itens verticalmente */
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center; 
 }
 
 .texto-central{
@@ -70,7 +68,7 @@ h1 {
     color: #f1df26;
 }
 
-/* Barra inferior */
+
 #lower_bar {
     height: 55px;
     width: 100%;
@@ -90,7 +88,7 @@ h1 {
     text-shadow: 1px 1px #a76a40;
 }
 
-/* Animações das nuvens */
+
 .nuvem,
 .nuvem2,
 .nuvem3 {
@@ -139,7 +137,7 @@ h1 {
     to { transform: translateX(500%); }
 }
 
-/* Estilos para inputs */
+
 #centro input[type="text"] {
     width: 250px;
     height: 170px;
@@ -156,7 +154,7 @@ h1 {
     padding: 5px;
 }
 
-/* Botões de fechar e posicionamento */
+
 /*.close {
     display: block;
     font-family: "Cherry Bomb One", system-ui;
@@ -185,13 +183,13 @@ h1 {
     text-shadow: 1px 1px #186685;
 }
 
-/* Estilos para os botões principais */
+
 .botoes {
     display: flex;
-    flex-direction: column; /* Garante que os botões fiquem em uma coluna */
-    align-items: center; /* Alinha os botões ao centro */
+    flex-direction: column;
+    align-items: center; 
     justify-content: center;
-    margin-top: 30px; /* Espaço entre o título e os botões */
+    margin-top: 30px; 
 }
 
 .botao {
@@ -209,7 +207,7 @@ h1 {
     text-shadow: 2px 2px #c61236;
 }
 
-/* Estilos para a área de texto */
+
 .botoes textarea {
     font-family: Arial;
     color: #000;

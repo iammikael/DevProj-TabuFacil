@@ -10,7 +10,6 @@ export default async function handler(req, res) {
   try {
     let whereClause = {};
 
-    // Define a cláusula de busca baseada no tipo de usuário
     if (alunoId) {
       whereClause = { id_aluno: parseInt(alunoId) };
     } else if (professorId) {
@@ -21,17 +20,16 @@ export default async function handler(req, res) {
 
     const treinamentos = await prisma.treinamento.findMany({
       where: whereClause,
-      // Inclui os dados relacionados do aluno e da turma na resposta
       include: {
-        aluno: { // Busca o nome do aluno relacionado
+        aluno: { 
           select: { nome: true },
         },
-        turma: { // Busca o nome da turma relacionada
+        turma: { 
           select: { nome: true },
         },
       },
       orderBy: {
-        data_hora: 'desc', // Ordena do mais recente para o mais antigo
+        data_hora: 'desc',
       },
     });
 

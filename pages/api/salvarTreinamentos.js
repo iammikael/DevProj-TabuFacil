@@ -23,7 +23,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Cria o registro do treinamento com a média de acertos
     const novoTreinamento = await prisma.treinamento.create({
       data: {
         id_aluno,
@@ -31,11 +30,10 @@ export default async function handler(req, res) {
         id_professor,
         media_acertos: acertos / total_questoes,
         data_hora: new Date(),
-        avaliacao_prof: null // pode ser atualizado depois
+        avaliacao_prof: null 
       }
     });
 
-    // Cria as respostas na tabela treinamento_tabuada
     const respostasFormatadas = respostas.map((res) => ({
       primeiro_numero: res.primeiro_numero,
       segundo_numero: res.segundo_numero,

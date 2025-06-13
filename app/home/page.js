@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import "./home.css";
 
 export default function MenuPage() {
-  const router = useRouter();  // Inicializa o hook de navegação
+  const router = useRouter(); 
 
   const handlePlay = () => {
     router.push("/ModoJogo");  
